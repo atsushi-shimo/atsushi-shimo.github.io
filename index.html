@@ -1,1 +1,202 @@
-<h1>Hello</h1>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Atsushi Shimo — AI Visual Creator. Cinematic works, generative art, and immersive video experiences.">
+  <title>Atsushi Shimo — AI Visual Creator</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="header-inner">
+      <a href="#hero" class="logo">SHIMO</a>
+      <nav class="nav">
+        <a href="#showreel">Works</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav-mobile">
+      <a href="#showreel" class="nav-mobile-link">Works</a>
+      <a href="#gallery" class="nav-mobile-link">Gallery</a>
+      <a href="#contact" class="nav-mobile-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <p class="hero-eyebrow">AI Visual Creator</p>
+      <h1 class="hero-title">
+        <span class="hero-title-line">Atsushi</span>
+        <span class="hero-title-line italic">Shimo</span>
+      </h1>
+      <p class="hero-sub">Cinematic imagery at the intersection<br>of artificial intelligence and human vision.</p>
+      <a href="#showreel" class="hero-cta">View Works</a>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- VIDEO SHOWREEL -->
+  <section id="showreel">
+    <div class="section-label">Showreel</div>
+    <h2 class="section-title">Selected Works</h2>
+    <div class="showreel-grid">
+      <div class="video-item">
+        <div class="video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID_1"
+            title="Showreel 01"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p class="video-label">Vol. 01 — 2024</p>
+      </div>
+      <div class="video-item">
+        <div class="video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID_2"
+            title="Showreel 02"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p class="video-label">Vol. 02 — 2024</p>
+      </div>
+      <div class="video-item">
+        <div class="video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID_3"
+            title="Showreel 03"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p class="video-label">Vol. 03 — 2023</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTWORKS GALLERY -->
+  <section id="gallery">
+    <div class="section-label">Gallery</div>
+    <h2 class="section-title">Artworks</h2>
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="meta-mandala">Meta Mandala</button>
+      <button class="filter-btn" data-filter="line">Line</button>
+      <button class="filter-btn" data-filter="wave">Wave</button>
+      <button class="filter-btn" data-filter="generative">Generative</button>
+      <button class="filter-btn" data-filter="shape">Shape</button>
+      <button class="filter-btn" data-filter="texture-art">Texture Art</button>
+      <button class="filter-btn" data-filter="3d-art">3D Art</button>
+    </div>
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- ここに作品を追加 -->
+      <!-- 例: <div class="gallery-item" data-category="meta-mandala">
+                  <img src="images/work01.jpg" alt="Meta Mandala 01">
+                  <div class="gallery-overlay"><p>Meta Mandala 01</p></div>
+               </div> -->
+
+      <!-- プレースホルダー（実際の画像と差し替えてください） -->
+      <div class="gallery-item" data-category="meta-mandala">
+        <div class="gallery-placeholder"></div>
+        <div class="gallery-overlay"><p>Meta Mandala 01</p></div>
+      </div>
+      <div class="gallery-item" data-category="line">
+        <div class="gallery-placeholder"></div>
+        <div class="gallery-overlay"><p>Line 01</p></div>
+      </div>
+      <div class="gallery-item" data-category="wave">
+        <div class="gallery-placeholder"></div>
+        <div class="gallery-overlay"><p>Wave 01</p></div>
+      </div>
+      <div class="gallery-item" data-category="generative">
+        <div class="gallery-placeholder"></div>
+        <div class="gallery-overlay"><p>Generative 01</p></div>
+      </div>
+      <div class="gallery-item" data-category="shape">
+        <div class="gallery-placeholder"></div>
+        <div class="gallery-overlay"><p>Shape 01</p></div>
+      </div>
+      <div class="gallery-item" data-category="texture-art">
+        <div class="gallery-placeholder"></div>
+        <div class="gallery-overlay"><p>Texture Art 01</p></div>
+      </div>
+      <div class="gallery-item" data-category="3d-art">
+        <div class="gallery-placeholder"></div>
+        <div class="gallery-overlay"><p>3D Art 01</p></div>
+      </div>
+      <div class="gallery-item" data-category="meta-mandala">
+        <div class="gallery-placeholder"></div>
+        <div class="gallery-overlay"><p>Meta Mandala 02</p></div>
+      </div>
+      <div class="gallery-item" data-category="generative">
+        <div class="gallery-placeholder"></div>
+        <div class="gallery-overlay"><p>Generative 02</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="contact-sub">For collaborations, commissions, and inquiries.</p>
+    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+      <input type="hidden" name="subject" value="Portfolio Inquiry — Atsushi Shimo">
+      <input type="hidden" name="redirect" value="">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">
+        <span class="submit-text">Send Message</span>
+        <span class="submit-arrow">→</span>
+      </button>
+      <p id="form-status" class="form-status"></p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2024 Atsushi Shimo. All rights reserved.</p>
+      <div class="footer-sns">
+        <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X / Twitter">X</a>
+        <a href="https://youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+        <a href="https://vimeo.com/" target="_blank" rel="noopener" aria-label="Vimeo">VM</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
