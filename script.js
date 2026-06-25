@@ -6,16 +6,16 @@
   const ctx = canvas.getContext('2d');
 
   let W, H, particles;
-  const COUNT = 220;
+  const COUNT = 180;
 
-  // Color palette: metallic gold, cyan, electric blue, white
+  // Color palette: metallic gold & warm shimmer only
   const COLORS = [
-    [255, 220, 120],  // bright metallic gold
-    [200, 170,  80],  // deep gold
-    [ 80, 230, 230],  // bright cyan
-    [ 40, 200, 220],  // deep cyan
-    [120, 200, 255],  // electric blue
-    [255, 255, 240],  // near-white shimmer
+    [255, 220, 100],  // bright gold
+    [220, 175,  70],  // mid gold
+    [200, 145,  40],  // deep gold
+    [255, 240, 160],  // pale gold shimmer
+    [255, 255, 230],  // near-white
+    [240, 200,  90],  // warm gold
   ];
 
   function resize() {
@@ -33,12 +33,12 @@
       const col = COLORS[Math.floor(Math.random() * COLORS.length)];
       return {
         x:      Math.random() * W,
-        y:      Math.random() * H,
-        r:      isLarge ? rand(1.2, 2.2) : isMedium ? rand(0.6, 1.2) : rand(0.2, 0.7),
-        vx:     rand(-0.18, 0.18),
-        vy:     rand(-0.18, 0.18),
+        y:      Math.pow(Math.random(), 1.8) * H,
+        r:      isLarge ? rand(0.8, 1.6) : isMedium ? rand(0.4, 0.9) : rand(0.15, 0.5),
+        vx:     rand(-0.08, 0.08),
+        vy:     rand(-0.10, 0.02),  // drift upward slightly
         col,
-        alpha:  isLarge ? rand(0.6, 0.9) : isMedium ? rand(0.35, 0.65) : rand(0.12, 0.4),
+        alpha:  isLarge ? rand(0.5, 0.85) : isMedium ? rand(0.25, 0.55) : rand(0.08, 0.35),
         phase:  Math.random() * Math.PI * 2,
         speed:  rand(0.015, 0.045),
         type:   isLarge ? 'star' : isMedium ? 'glow' : 'dot',
@@ -138,7 +138,7 @@
         if (dist < 100) {
           const a = (1 - dist / 100) * 0.1;
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(60,200,220,${a})`;
+          ctx.strokeStyle = `rgba(200,160,60,${a * 0.6})`;
           ctx.lineWidth = 0.4;
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);

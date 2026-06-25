@@ -15,7 +15,7 @@
   <!-- HEADER -->
   <header id="header">
     <div class="header-inner">
-      <a href="#hero" class="logo">ATSUSHI SHIMOYAMA</a>
+      <a href="#hero" class="logo">SHIMO</a>
       <nav class="nav">
         <a href="#showreel">Works</a>
         <a href="#gallery">Gallery</a>
@@ -34,16 +34,15 @@
 
   <!-- HERO -->
   <section id="hero">
+    <!-- 背景画像 -->
+    <div class="hero-bg"></div>
+    <!-- パーティクル Canvas -->
     <canvas id="hero-canvas"></canvas>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Visual Creator / Artist</p>
-      <h1 class="hero-title">
-        <span class="hero-title-line">Atsushi</span>
-        <span class="hero-title-line italic">Shimoyama</span>
-      </h1>
-      <p class="hero-sub">Cinematic imagery at the intersection<br>of artificial intelligence and human vision.</p>
+    <!-- CTA ボタン -->
+    <div class="hero-overlay">
       <a href="#showreel" class="hero-cta">View Works</a>
     </div>
+    <!-- スクロールヒント -->
     <div class="hero-scroll-hint">
       <span>Scroll</span>
       <div class="scroll-line"></div>
@@ -58,7 +57,7 @@
       <div class="video-item">
         <div class="video-wrapper">
           <iframe
-            src="https://www.youtube.com/embed/xzMQlyqW2-8"
+            src="https://www.youtube.com/embed/VIDEO_ID_1"
             title="Showreel 01"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -70,7 +69,7 @@
       <div class="video-item">
         <div class="video-wrapper">
           <iframe
-            src="https://www.youtube.com/embed/QxmP0sZDLZs"
+            src="https://www.youtube.com/embed/VIDEO_ID_2"
             title="Showreel 02"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -82,7 +81,7 @@
       <div class="video-item">
         <div class="video-wrapper">
           <iframe
-            src="https://www.youtube.com/embed/BWIeWbF18Z0"
+            src="https://www.youtube.com/embed/VIDEO_ID_3"
             title="Showreel 03"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -111,7 +110,7 @@
 <div class="gallery-grid" id="gallery-grid">
 
       <!-- Meta Mandala -->
-      <div class="gallery-item" data-category="meta-mandala"><img loading="eager" src="artworks/meta-mandala/mandala01.jpg" alt="Meta Mandala 01"><div class="gallery-overlay"><p>Meta Mandala 01</p></div></div>
+      <div class="gallery-item" data-category="meta-mandala"><img src="artworks/meta-mandala/mandala01.jpg" alt="Meta Mandala 01"><div class="gallery-overlay"><p>Meta Mandala 01</p></div></div>
       <div class="gallery-item" data-category="meta-mandala"><img src="artworks/meta-mandala/mandala02.jpg" alt="Meta Mandala 02"><div class="gallery-overlay"><p>Meta Mandala 02</p></div></div>
       <div class="gallery-item" data-category="meta-mandala"><img src="artworks/meta-mandala/mandala03.jpg" alt="Meta Mandala 03"><div class="gallery-overlay"><p>Meta Mandala 03</p></div></div>
       <div class="gallery-item" data-category="meta-mandala"><img src="artworks/meta-mandala/mandala04.jpg" alt="Meta Mandala 04"><div class="gallery-overlay"><p>Meta Mandala 04</p></div></div>
@@ -213,8 +212,8 @@
     <h2 class="section-title">Get in Touch</h2>
     <p class="contact-sub">For collaborations, commissions, and inquiries.</p>
     <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="a189506c-1b88-4fe8-ad1e-b852b0fe4e2b">
-      <input type="hidden" name="subject" value="Portfolio Inquiry — Atsushi Shimoyama">
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+      <input type="hidden" name="subject" value="Portfolio Inquiry — Atsushi Shimo">
       <input type="hidden" name="redirect" value="">
       <div class="form-group">
         <label for="name">Name</label>
@@ -239,11 +238,12 @@
   <!-- FOOTER -->
   <footer id="footer">
     <div class="footer-inner">
-      <p class="footer-copy">© 2024 Atsushi Shimoyama. All rights reserved.</p>
-     <div class="footer-sns">
-        <a href="https://www.instagram.com/shimo_ats/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-        <a href="https://x.com/shimo_ats" target="_blank" rel="noopener" aria-label="X / Twitter">X</a>
-        <a href="https://youtu.be/xzMQlyqW2-8" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+      <p class="footer-copy">© 2024 Atsushi Shimo. All rights reserved.</p>
+      <div class="footer-sns">
+        <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X / Twitter">X</a>
+        <a href="https://youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+        <a href="https://vimeo.com/" target="_blank" rel="noopener" aria-label="Vimeo">VM</a>
       </div>
     </div>
   </footer>
