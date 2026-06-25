@@ -1,82 +1,126 @@
 /* ============================================
-   HERO CANVAS — particle field with sparkle
+   HERO CANVAS — intense sparkle particle field
    ============================================ */
 (function () {
   const canvas = document.getElementById('hero-canvas');
   const ctx = canvas.getContext('2d');
 
   let W, H, particles;
-  const COUNT = 120;
+  const COUNT = 220;
 
-  const GOLD  = [212, 184, 122];
-  const CYAN  = [79, 207, 207];
-  const BLUE  = [100, 160, 255];
-  const WHITE = [240, 237, 232];
+  // Color palette: metallic gold, cyan, electric blue, white
+  const COLORS = [
+    [255, 220, 120],  // bright metallic gold
+    [200, 170,  80],  // deep gold
+    [ 80, 230, 230],  // bright cyan
+    [ 40, 200, 220],  // deep cyan
+    [120, 200, 255],  // electric blue
+    [255, 255, 240],  // near-white shimmer
+  ];
 
   function resize() {
     W = canvas.width  = window.innerWidth;
     H = canvas.height = window.innerHeight;
   }
 
-  function randBetween(a, b) { return a + Math.random() * (b - a); }
-
-  function pickColor() {
-    const r = Math.random();
-    if (r < 0.35) return GOLD;
-    if (r < 0.60) return CYAN;
-    if (r < 0.80) return BLUE;
-    return WHITE;
-  }
+  function rand(a, b) { return a + Math.random() * (b - a); }
 
   function initParticles() {
     particles = Array.from({ length: COUNT }, () => {
-      const isSparkle = Math.random() < 0.18;
+      const type = Math.random();
+      const isLarge   = type < 0.12;  // big sparkles
+      const isMedium  = type < 0.30;  // medium glow dots
+      const col = COLORS[Math.floor(Math.random() * COLORS.length)];
       return {
-        x:        Math.random() * W,
-        y:        Math.random() * H,
-        r:        isSparkle ? randBetween(1.8, 3.5) : randBetween(0.4, 1.6),
-        vx:       randBetween(-0.15, 0.15),
-        vy:       randBetween(-0.15, 0.15),
-        col:      pickColor(),
-        alpha:    isSparkle ? randBetween(0.5, 0.9) : randBetween(0.1, 0.45),
-        sparkle:  isSparkle,
-        phase:    Math.random() * Math.PI * 2,
-        speed:    randBetween(0.012, 0.03),
+        x:      Math.random() * W,
+        y:      Math.random() * H,
+        r:      isLarge ? rand(2.5, 5.0) : isMedium ? rand(1.2, 2.5) : rand(0.3, 1.2),
+        vx:     rand(-0.18, 0.18),
+        vy:     rand(-0.18, 0.18),
+        col,
+        alpha:  isLarge ? rand(0.7, 1.0) : isMedium ? rand(0.4, 0.75) : rand(0.15, 0.5),
+        phase:  Math.random() * Math.PI * 2,
+        speed:  rand(0.015, 0.045),
+        type:   isLarge ? 'star' : isMedium ? 'glow' : 'dot',
       };
     });
   }
 
-  function drawSparkle(p, t) {
-    const pulse = 0.6 + 0.4 * Math.sin(t * p.speed + p.phase);
-    const r = p.r * pulse;
-    const alpha = p.alpha * pulse;
+  function drawStar(p, t) {
+    const pulse = 0.55 + 0.45 * Math.sin(t * p.speed + p.phase);
+    const r     = p.r * pulse;
+    const a     = p.alpha * pulse;
+    const [cr, cg, cb] = p.col;
 
-    // outer glow
-    const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 4);
-    grd.addColorStop(0, `rgba(${p.col[0]},${p.col[1]},${p.col[2]},${alpha * 0.6})`);
-    grd.addColorStop(1, `rgba(${p.col[0]},${p.col[1]},${p.col[2]},0)`);
+    // large outer glow
+    let grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 9);
+    grd.addColorStop(0,   `rgba(${cr},${cg},${cb},${a * 0.45})`);
+    grd.addColorStop(0.4, `rgba(${cr},${cg},${cb},${a * 0.12})`);
+    grd.addColorStop(1,   `rgba(${cr},${cg},${cb},0)`);
     ctx.beginPath();
-    ctx.arc(p.x, p.y, r * 4, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, r * 9, 0, Math.PI * 2);
     ctx.fillStyle = grd;
     ctx.fill();
 
-    // core dot
+    // mid glow
+    grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 3.5);
+    grd.addColorStop(0, `rgba(${cr},${cg},${cb},${a * 0.9})`);
+    grd.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
     ctx.beginPath();
-    ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${p.col[0]},${p.col[1]},${p.col[2]},${alpha})`;
+    ctx.arc(p.x, p.y, r * 3.5, 0, Math.PI * 2);
+    ctx.fillStyle = grd;
     ctx.fill();
 
-    // cross flare
+    // bright core
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, r * 0.6, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${a * 0.95})`;
+    ctx.fill();
+
+    // cross flare (4-point star)
     ctx.save();
-    ctx.globalAlpha = alpha * 0.5;
-    ctx.strokeStyle = `rgba(${p.col[0]},${p.col[1]},${p.col[2]},1)`;
-    ctx.lineWidth = 0.6;
-    const len = r * 3.5;
+    ctx.globalAlpha = a * 0.65;
+    const len = r * 7;
+    const shortLen = r * 3;
+    // long arms
+    ctx.strokeStyle = `rgba(${cr},${cg},${cb},1)`;
+    ctx.lineWidth = r * 0.35;
+    ctx.lineCap = 'round';
     ctx.beginPath();
     ctx.moveTo(p.x - len, p.y); ctx.lineTo(p.x + len, p.y);
     ctx.moveTo(p.x, p.y - len); ctx.lineTo(p.x, p.y + len);
     ctx.stroke();
+    // diagonal arms (thinner)
+    ctx.globalAlpha = a * 0.3;
+    ctx.lineWidth = r * 0.2;
+    ctx.beginPath();
+    ctx.moveTo(p.x - shortLen * 0.7, p.y - shortLen * 0.7);
+    ctx.lineTo(p.x + shortLen * 0.7, p.y + shortLen * 0.7);
+    ctx.moveTo(p.x + shortLen * 0.7, p.y - shortLen * 0.7);
+    ctx.lineTo(p.x - shortLen * 0.7, p.y + shortLen * 0.7);
+    ctx.stroke();
     ctx.restore();
+  }
+
+  function drawGlow(p, t) {
+    const pulse = 0.6 + 0.4 * Math.sin(t * p.speed + p.phase);
+    const r     = p.r * pulse;
+    const a     = p.alpha * pulse;
+    const [cr, cg, cb] = p.col;
+
+    const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 5);
+    grd.addColorStop(0, `rgba(${cr},${cg},${cb},${a})`);
+    grd.addColorStop(0.5, `rgba(${cr},${cg},${cb},${a * 0.3})`);
+    grd.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, r * 5, 0, Math.PI * 2);
+    ctx.fillStyle = grd;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${a * 0.8})`;
+    ctx.fill();
   }
 
   let t = 0;
@@ -85,23 +129,16 @@
     ctx.clearRect(0, 0, W, H);
     t++;
 
-    // subtle radial gradient bg tint
-    const bgGrd = ctx.createRadialGradient(W * 0.5, H * 0.4, 0, W * 0.5, H * 0.4, W * 0.7);
-    bgGrd.addColorStop(0, 'rgba(15, 30, 60, 0.35)');
-    bgGrd.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = bgGrd;
-    ctx.fillRect(0, 0, W, H);
-
-    // connection lines
+    // connection lines — cyan tint
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 110) {
-          const a = (1 - dist / 110) * 0.07;
+        if (dist < 100) {
+          const a = (1 - dist / 100) * 0.1;
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(100,160,255,${a})`;
+          ctx.strokeStyle = `rgba(60,200,220,${a})`;
           ctx.lineWidth = 0.4;
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
@@ -110,23 +147,24 @@
       }
     }
 
-    // dots & sparkles
+    // draw particles
     particles.forEach(p => {
-      if (p.sparkle) {
-        drawSparkle(p, t);
-      } else {
+      if (p.type === 'star') drawStar(p, t);
+      else if (p.type === 'glow') drawGlow(p, t);
+      else {
+        const [cr, cg, cb] = p.col;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.col[0]},${p.col[1]},${p.col[2]},${p.alpha})`;
+        ctx.fillStyle = `rgba(${cr},${cg},${cb},${p.alpha})`;
         ctx.fill();
       }
 
       p.x += p.vx;
       p.y += p.vy;
-      if (p.x < -10) p.x = W + 10;
-      if (p.x > W + 10) p.x = -10;
-      if (p.y < -10) p.y = H + 10;
-      if (p.y > H + 10) p.y = -10;
+      if (p.x < -20) p.x = W + 20;
+      if (p.x > W + 20) p.x = -20;
+      if (p.y < -20) p.y = H + 20;
+      if (p.y > H + 20) p.y = -20;
     });
 
     requestAnimationFrame(drawFrame);
@@ -136,10 +174,7 @@
   initParticles();
   drawFrame();
 
-  window.addEventListener('resize', () => {
-    resize();
-    initParticles();
-  });
+  window.addEventListener('resize', () => { resize(); initParticles(); });
 })();
 
 
@@ -161,14 +196,11 @@
   const toggle = document.querySelector('.nav-toggle');
   const navMobile = document.querySelector('.nav-mobile');
   const links = document.querySelectorAll('.nav-mobile-link');
-
   if (!toggle || !navMobile) return;
-
   toggle.addEventListener('click', () => {
     const open = navMobile.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open);
   });
-
   links.forEach(link => {
     link.addEventListener('click', () => {
       navMobile.classList.remove('open');
@@ -184,14 +216,11 @@
 (function () {
   const btns  = document.querySelectorAll('.filter-btn');
   const items = document.querySelectorAll('.gallery-item');
-
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
       btns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
       const filter = btn.dataset.filter;
-
       items.forEach(item => {
         if (filter === 'all' || item.dataset.category === filter) {
           item.classList.remove('hidden');
@@ -205,10 +234,9 @@
 
 
 /* ============================================
-   GALLERY LIGHTBOX — fullscreen on click
+   GALLERY LIGHTBOX
    ============================================ */
 (function () {
-  // create overlay
   const overlay = document.createElement('div');
   overlay.id = 'lightbox';
   overlay.innerHTML = `
@@ -225,55 +253,38 @@
   const lbClose = document.getElementById('lightbox-close');
   const lbPrev  = document.getElementById('lightbox-prev');
   const lbNext  = document.getElementById('lightbox-next');
-
-  let items = [];
-  let current = 0;
+  let items = [], current = 0;
 
   function getVisibleItems() {
     return [...document.querySelectorAll('.gallery-item:not(.hidden) img')];
   }
-
   function open(idx) {
-    items = getVisibleItems();
-    current = idx;
+    items = getVisibleItems(); current = idx;
     lbImg.src = items[current].src;
     lb.classList.add('active');
     document.body.style.overflow = 'hidden';
     updateNav();
   }
-
   function close() {
     lb.classList.remove('active');
     document.body.style.overflow = '';
     lbImg.src = '';
   }
-
   function updateNav() {
     lbPrev.style.display = current === 0 ? 'none' : 'flex';
     lbNext.style.display = current === items.length - 1 ? 'none' : 'flex';
   }
-
-  function prev() {
-    if (current > 0) { current--; lbImg.src = items[current].src; updateNav(); }
-  }
-
-  function next() {
-    if (current < items.length - 1) { current++; lbImg.src = items[current].src; updateNav(); }
-  }
+  function prev() { if (current > 0) { current--; lbImg.src = items[current].src; updateNav(); } }
+  function next() { if (current < items.length - 1) { current++; lbImg.src = items[current].src; updateNav(); } }
 
   document.addEventListener('click', e => {
     const img = e.target.closest('.gallery-item:not(.hidden) img');
-    if (img) {
-      const allImgs = getVisibleItems();
-      open(allImgs.indexOf(img));
-    }
+    if (img) { const all = getVisibleItems(); open(all.indexOf(img)); }
   });
-
   lbClose.addEventListener('click', close);
   document.getElementById('lightbox-bg').addEventListener('click', close);
   lbPrev.addEventListener('click', prev);
   lbNext.addEventListener('click', next);
-
   document.addEventListener('keydown', e => {
     if (!lb.classList.contains('active')) return;
     if (e.key === 'Escape') close();
@@ -290,9 +301,7 @@
   const targets = document.querySelectorAll(
     '#showreel, #contact, .section-title, .section-label'
   );
-
   targets.forEach(el => el.classList.add('reveal'));
-
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
@@ -304,7 +313,6 @@
     },
     { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
   );
-
   targets.forEach(el => observer.observe(el));
 })();
 
@@ -315,23 +323,16 @@
 (function () {
   const form   = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
-
   if (!form) return;
-
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = form.querySelector('.submit-btn');
     btn.disabled = true;
     status.textContent = 'Sending…';
-
     try {
       const data = new FormData(form);
-      const res  = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: data,
-      });
+      const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
       const json = await res.json();
-
       if (json.success) {
         status.textContent = 'Message sent. Thank you.';
         form.reset();
