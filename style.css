@@ -160,7 +160,6 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   bottom: 6%;
   left: 62%;
-  transform: translateX(-50%);
   z-index: 3;
   display: flex;
   flex-direction: column;
