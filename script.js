@@ -34,11 +34,11 @@
       return {
         x:      Math.random() * W,
         y:      Math.random() * H,
-        r:      isLarge ? rand(2.5, 5.0) : isMedium ? rand(1.2, 2.5) : rand(0.3, 1.2),
+        r:      isLarge ? rand(1.2, 2.2) : isMedium ? rand(0.6, 1.2) : rand(0.2, 0.7),
         vx:     rand(-0.18, 0.18),
         vy:     rand(-0.18, 0.18),
         col,
-        alpha:  isLarge ? rand(0.7, 1.0) : isMedium ? rand(0.4, 0.75) : rand(0.15, 0.5),
+        alpha:  isLarge ? rand(0.6, 0.9) : isMedium ? rand(0.35, 0.65) : rand(0.12, 0.4),
         phase:  Math.random() * Math.PI * 2,
         speed:  rand(0.015, 0.045),
         type:   isLarge ? 'star' : isMedium ? 'glow' : 'dot',
@@ -53,21 +53,21 @@
     const [cr, cg, cb] = p.col;
 
     // large outer glow
-    let grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 9);
+    let grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 6);
     grd.addColorStop(0,   `rgba(${cr},${cg},${cb},${a * 0.45})`);
     grd.addColorStop(0.4, `rgba(${cr},${cg},${cb},${a * 0.12})`);
     grd.addColorStop(1,   `rgba(${cr},${cg},${cb},0)`);
     ctx.beginPath();
-    ctx.arc(p.x, p.y, r * 9, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, r * 6, 0, Math.PI * 2);
     ctx.fillStyle = grd;
     ctx.fill();
 
     // mid glow
-    grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 3.5);
+    grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 2.5);
     grd.addColorStop(0, `rgba(${cr},${cg},${cb},${a * 0.9})`);
     grd.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
     ctx.beginPath();
-    ctx.arc(p.x, p.y, r * 3.5, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, r * 2.5, 0, Math.PI * 2);
     ctx.fillStyle = grd;
     ctx.fill();
 
@@ -80,7 +80,7 @@
     // cross flare (4-point star)
     ctx.save();
     ctx.globalAlpha = a * 0.65;
-    const len = r * 7;
+    const len = r * 5;
     const shortLen = r * 3;
     // long arms
     ctx.strokeStyle = `rgba(${cr},${cg},${cb},1)`;
@@ -108,12 +108,12 @@
     const a     = p.alpha * pulse;
     const [cr, cg, cb] = p.col;
 
-    const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 5);
+    const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 3.5);
     grd.addColorStop(0, `rgba(${cr},${cg},${cb},${a})`);
     grd.addColorStop(0.5, `rgba(${cr},${cg},${cb},${a * 0.3})`);
     grd.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
     ctx.beginPath();
-    ctx.arc(p.x, p.y, r * 5, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, r * 3.5, 0, Math.PI * 2);
     ctx.fillStyle = grd;
     ctx.fill();
 
