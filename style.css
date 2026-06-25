@@ -162,7 +162,7 @@ a { color: inherit; text-decoration: none; }
 .hero-overlay {
   position: absolute;
   bottom: 6%;
-  left: 58%;
+  left: 55%;
   z-index: 3;
   display: flex;
   flex-direction: column;
