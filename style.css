@@ -158,8 +158,8 @@ a { color: inherit; text-decoration: none; }
 /* CTAボタンエリア */
 .hero-overlay {
   position: absolute;
-  bottom: 12%;
-  left: 50%;
+  bottom: 6%;
+  left: 75%;
   transform: translateX(-50%);
   z-index: 3;
   display: flex;
@@ -196,7 +196,7 @@ a { color: inherit; text-decoration: none; }
 .hero-scroll-hint {
   position: absolute;
   bottom: 32px;
-  left: 50%;
+  left: 75%;
   transform: translateX(-50%);
   z-index: 3;
   display: flex;
