@@ -146,7 +146,7 @@
    ============================================ */
 (function () {
   const targets = document.querySelectorAll(
-    '#showreel, #gallery, #contact, .video-item, .section-title, .section-label'
+    '#showreel, #contact, .section-title, .section-label'
   );
 
   targets.forEach(el => el.classList.add('reveal'));
