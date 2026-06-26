@@ -407,6 +407,7 @@ section {
   color: var(--muted);
   margin-bottom: 12px;
   text-transform: uppercase;
+  margin-top: -8px;
 }
 
 .about-origin {
