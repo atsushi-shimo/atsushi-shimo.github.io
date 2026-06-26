@@ -721,6 +721,8 @@ section {
 
   #lightbox-prev { left: 8px; }
   #lightbox-next { right: 8px; }
+  .hero-bg {
+    background-position: center center;
 }
 
 /* ============================================
