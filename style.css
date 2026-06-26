@@ -141,7 +141,7 @@ a { color: inherit; text-decoration: none; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url('images/site_top.png') center center / cover no-repeat;
+  background: url('images/site_top.png') 75% center / cover no-repeat;
   z-index: 0;
 }
 
@@ -158,8 +158,8 @@ a { color: inherit; text-decoration: none; }
 /* CTAボタンエリア */
 .hero-overlay {
   position: absolute;
-  bottom: 12%;
-  left: 50%;
+  bottom: 3%;
+  left: 55%;
   transform: translateX(-50%);
   z-index: 3;
   display: flex;
@@ -196,7 +196,7 @@ a { color: inherit; text-decoration: none; }
 .hero-scroll-hint {
   position: absolute;
   bottom: 32px;
-  left: 50%;
+  left: 55%;
   transform: translateX(-50%);
   z-index: 3;
   display: flex;
