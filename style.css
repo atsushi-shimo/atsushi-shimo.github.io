@@ -86,7 +86,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--white);
+  color: var(--white-dim);
   transition: color 0.2s, text-shadow 0.2s;
 }
 .nav a:hover { color: var(--gold-pale); text-shadow: 0 0 12px rgba(200,145,42,0.4); }
@@ -131,9 +131,6 @@ a { color: inherit; text-decoration: none; }
 #hero {
   position: relative;
   width: 100%;
-  max-width: 100%;
-  padding: 0;
-  margin: 0;
   height: 100dvh;
   min-height: 600px;
   overflow: hidden;
@@ -144,7 +141,7 @@ a { color: inherit; text-decoration: none; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url('images/site_top_large.png') 75% center / cover no-repeat;
+  background: url('images/site_top.png') center center / cover no-repeat;
   z-index: 0;
 }
 
@@ -161,8 +158,9 @@ a { color: inherit; text-decoration: none; }
 /* CTAボタンエリア */
 .hero-overlay {
   position: absolute;
-  bottom: 3%;
-  left: 55%;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 3;
   display: flex;
   flex-direction: column;
@@ -197,7 +195,7 @@ a { color: inherit; text-decoration: none; }
 
 .hero-scroll-hint {
   position: absolute;
-  bottom: 16px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
@@ -206,7 +204,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 10px;
   opacity: 0;
-  animation: fadeUpScroll 1s var(--ease-out) 1.8s forwards;
+  animation: fadeUp 1s var(--ease-out) 1.8s forwards;
 }
 .hero-scroll-hint span {
   font-size: 10px;
@@ -385,6 +383,103 @@ section {
   letter-spacing: 0.12em;
   color: var(--white);
   text-transform: uppercase;
+}
+
+
+/* ============================================
+   ABOUT
+   ============================================ */
+#about {
+  border-top: 1px solid rgba(200,145,42,0.12);
+}
+
+.about-origin {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-top: -48px;
+  margin-bottom: 2px;
+}
+
+.about-origin-en {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 56px;
+  opacity: 0.6;
+}
+
+.about-block {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 40px 64px;
+  margin-bottom: 0;
+}
+
+.about-category {
+  padding-top: 4px;
+}
+
+.about-icon {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.about-role {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--gold-pale);
+  line-height: 1.1;
+  margin-bottom: 4px;
+  text-shadow:
+    0 1px 0 rgba(255,230,120,0.2),
+    0 -1px 0 rgba(60,30,0,0.6),
+    0 0 16px rgba(200,145,42,0.3);
+}
+
+.about-role-en {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 300;
+  margin: 0;
+}
+
+.about-text {
+  padding-top: 4px;
+}
+
+.about-ja {
+  font-size: 14px;
+  line-height: 2;
+  color: var(--white);
+  margin-bottom: 24px;
+  letter-spacing: 0.04em;
+}
+
+.about-en {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+  border-left: 1px solid rgba(200,145,42,0.2);
+  padding-left: 20px;
+}
+
+.about-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(200,145,42,0.2), transparent);
+  margin: 56px 0;
+}
+
+@media (max-width: 768px) {
+  .about-block {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 /* ============================================
@@ -582,11 +677,6 @@ section {
 @keyframes scrollPulse {
   0%, 100% { opacity: 1; transform: scaleY(1); }
   50%       { opacity: 0.4; transform: scaleY(0.6); }
-}
-
-@keyframes fadeUpScroll {
-  from { opacity: 0; transform: translateX(-50%) translateY(24px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
 /* ============================================
