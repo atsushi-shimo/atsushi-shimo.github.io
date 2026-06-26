@@ -278,7 +278,7 @@
   function next() { if (current < items.length - 1) { current++; lbImg.src = items[current].src; updateNav(); } }
 
   document.addEventListener('click', e => {
-    const img = e.target.closest('.gallery-item:not(.hidden) img');
+    const img = e.target.tagName === 'IMG' && e.target.closest('.gallery-item') ? e.target : null;
     if (img) { const all = getVisibleItems(); open(all.indexOf(img)); }
   });
   lbClose.addEventListener('click', close);
