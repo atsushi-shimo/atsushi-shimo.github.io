@@ -218,7 +218,7 @@ a { color: inherit; text-decoration: none; }
 .scroll-line {
   width: 1px;
   height: 36px;
-  background: linear-gradient(to top, var(--gold), transparent);
+  background: linear-gradient(to bottom, var(--gold), transparent);
   animation: scrollPulse 2s ease-in-out infinite;
 }
 
@@ -723,6 +723,9 @@ section {
   #lightbox-next { right: 8px; }
  .hero-bg {
     background-position: center center;
+  }
+  .hero-cta {
+    padding: 13px 28px;
   }
 }
 
