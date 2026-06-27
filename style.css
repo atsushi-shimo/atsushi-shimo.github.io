@@ -722,6 +722,7 @@ section {
   #lightbox-prev { left: 8px; }
   #lightbox-next { right: 8px; }
  .hero-bg {
+    background-image: url('images/site_top_tate.png');
     background-position: center center;
   }
   .hero-cta {
