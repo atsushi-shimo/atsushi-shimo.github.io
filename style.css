@@ -144,7 +144,7 @@ a { color: inherit; text-decoration: none; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url('images/site_top_large.png') 60% center / cover no-repeat;
+  background: url('images/site_top_large_new.png') 60% center / cover no-repeat;
   z-index: 0;
 }
 
@@ -722,7 +722,7 @@ section {
   #lightbox-prev { left: 8px; }
   #lightbox-next { right: 8px; }
  .hero-bg {
-    background-image: url('images/site_top_tate.png');
+    background-image: url('images/site_top_tate_new.png');
     background-position: center center;
   }
   .hero-cta {
